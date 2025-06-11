@@ -51,12 +51,24 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
 
 // Tombol download PDF
 
-// Pastikan html2pdf.js sudah dimuat terlebih dahulu di index.html
-
-// Perbaikan penting agar html2pdf berfungsi dengan benar
-
 document.getElementById("downloadBtn").addEventListener("click", function () {
   const element = document.getElementById("cv-output");
+
+  // Pastikan elemen terlihat
+  element.classList.remove("hidden");
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    html2pdf().set({
+      margin: 0.5,
+      filename: "cv.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+    }).from(element).save();
+  }, 500);
+});
+
 
   // Buat clone dengan ukuran yang cocok untuk PDF
   const clone = element.cloneNode(true);
