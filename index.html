@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembuat CV ATS-Friendly</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form id="cv-form">
+    <h1>Formulir CV</h1>
+    <input type="text" id="nama" placeholder="Nama" required>
+    <input type="text" id="jabatan" placeholder="Jabatan" required>
+    <input type="text" id="lokasi" placeholder="Lokasi" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="text" id="telepon" placeholder="Telepon" required>
+    <input type="text" id="linkedin" placeholder="LinkedIn">
+    <textarea id="profil" placeholder="Ringkasan Profil"></textarea>
+    <textarea id="skill" placeholder="Skill (pisahkan dengan koma)"></textarea>
+    <textarea id="pengalaman" placeholder="Pengalaman Kerja"></textarea>
+    <textarea id="pendidikan" placeholder="Pendidikan"></textarea>
+    <textarea id="projek" placeholder="Projek"></textarea>
+    <textarea id="sertifikat" placeholder="Sertifikat"></textarea>
+    <input type="file" id="foto" accept="image/*">
+
+    <select id="theme-select">
+      <option value="light">Tema Terang</option>
+      <option value="dark">Tema Gelap</option>
+    </select>
+
+    <select id="template-select">
+      <option value="template1">Template 1</option>
+      <option value="template2">Template 2</option>
+    </select>
+
+    <button type="submit">Buat CV</button>
+  </form>
+
+  <div id="cv-output" class="hidden template1">
+    <img id="cv-foto" alt="Foto Profil">
+    <h2 id="cv-nama"></h2>
+    <h3 id="cv-jabatan"></h3>
+    <p id="cv-kontak"></p>
+
+    <h3>Profil</h3>
+    <p id="cv-profil"></p>
+
+    <h3>Skill</h3>
+    <ul id="cv-skill"></ul>
+
+    <h3>Pengalaman Kerja</h3>
+    <p id="cv-pengalaman"></p>
+
+    <h3>Pendidikan</h3>
+    <p id="cv-pendidikan"></p>
+
+    <div id="cv-projek-block">
+      <h3>Projek</h3>
+      <p id="cv-projek"></p>
+    </div>
+
+    <div id="cv-sertifikat-block">
+      <h3>Sertifikat</h3>
+      <p id="cv-sertifikat"></p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="downloadBtn">Download PDF</button>
+    <button id="printBtn">Cetak</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
