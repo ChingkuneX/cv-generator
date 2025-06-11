@@ -1,3 +1,4 @@
+// Form input handler
 document.getElementById("cv-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -36,7 +37,7 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
   }
 
   // Tampilkan hasil
-  document.getElementById("cv-output").style.display = "block";
+  document.getElementById("cv-output").classList.remove("hidden");
 
   // Terapkan tema
   const theme = document.getElementById("theme-select").value;
@@ -50,11 +51,11 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
 });
 
 // Tombol download PDF
+// Pastikan elemen terlihat dan tunggu sebelum konversi
 
-document.getElementById("downloadBtn").addEventListener("click", function () {
+const downloadBtn = document.getElementById("downloadBtn");
+downloadBtn.addEventListener("click", function () {
   const element = document.getElementById("cv-output");
-
-  // Pastikan elemen terlihat
   element.classList.remove("hidden");
   window.scrollTo(0, 0);
 
@@ -69,29 +70,8 @@ document.getElementById("downloadBtn").addEventListener("click", function () {
   }, 500);
 });
 
-
-  // Buat clone dengan ukuran yang cocok untuk PDF
-  const clone = element.cloneNode(true);
-  clone.style.display = "block";
-  clone.style.position = "fixed";
-  clone.style.top = "0";
-  clone.style.left = "0";
-  clone.style.zIndex = "-1";
-  document.body.appendChild(clone);
-
-  html2pdf().set({
-    margin: 0.5,
-    filename: "cv.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-  })
-    .from(clone)
-    .save()
-    .then(() => document.body.removeChild(clone));
-});
-
 // Tombol cetak
-document.getElementById("printBtn").addEventListener("click", function () {
+const printBtn = document.getElementById("printBtn");
+printBtn.addEventListener("click", function () {
   window.print();
 });
