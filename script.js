@@ -36,7 +36,7 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
   }
 
   // Tampilkan hasil
-  document.getElementById("cv-output").classList.remove("hidden");
+  document.getElementById("cv-output").style.display = "block";
 
   // Terapkan tema
   const theme = document.getElementById("theme-select").value;
@@ -50,22 +50,30 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
 });
 
 // Tombol download PDF
+
+// Pastikan html2pdf.js sudah dimuat terlebih dahulu di index.html
+
+// Perbaikan penting agar html2pdf berfungsi dengan benar
+
 document.getElementById("downloadBtn").addEventListener("click", function () {
   const element = document.getElementById("cv-output");
 
+  // Buat clone dengan ukuran yang cocok untuk PDF
   const clone = element.cloneNode(true);
   clone.style.display = "block";
-  clone.classList.remove("hidden");
+  clone.style.position = "fixed";
+  clone.style.top = "0";
+  clone.style.left = "0";
+  clone.style.zIndex = "-1";
   document.body.appendChild(clone);
 
-  html2pdf()
-    .set({
-      margin: 0.5,
-      filename: "cv.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-    })
+  html2pdf().set({
+    margin: 0.5,
+    filename: "cv.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+  })
     .from(clone)
     .save()
     .then(() => document.body.removeChild(clone));
