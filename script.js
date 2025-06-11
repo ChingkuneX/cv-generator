@@ -1,4 +1,3 @@
-// Form input handler
 document.getElementById("cv-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -37,7 +36,9 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
   }
 
   // Tampilkan hasil
-  document.getElementById("cv-output").classList.remove("hidden");
+  const output = document.getElementById("cv-output");
+  output.classList.remove("hidden");
+  output.style.display = "block";
 
   // Terapkan tema
   const theme = document.getElementById("theme-select").value;
@@ -45,19 +46,18 @@ document.getElementById("cv-form").addEventListener("submit", function (e) {
 
   // Terapkan template
   const template = document.getElementById("template-select").value;
-  const output = document.getElementById("cv-output");
   output.classList.remove("template1", "template2");
   output.classList.add(template);
 });
 
 // Tombol download PDF
-// Pastikan elemen terlihat dan tunggu sebelum konversi
-
 const downloadBtn = document.getElementById("downloadBtn");
 downloadBtn.addEventListener("click", function () {
   const element = document.getElementById("cv-output");
+
   element.classList.remove("hidden");
-  window.scrollTo(0, 0);
+  element.style.display = "block"; // pastikan tampil
+  element.scrollIntoView();
 
   setTimeout(() => {
     html2pdf().set({
@@ -67,7 +67,7 @@ downloadBtn.addEventListener("click", function () {
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
     }).from(element).save();
-  }, 500);
+  }, 800);
 });
 
 // Tombol cetak
